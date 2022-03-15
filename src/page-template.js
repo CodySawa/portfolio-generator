@@ -1,6 +1,4 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-const [name, github] = profileDataArgs;
-const generatePage = (userName, github) => {
+const generatePage = (name, github) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
