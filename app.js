@@ -1,14 +1,6 @@
 const inquirer = require('inquirer');
-// const fs = require('fs');
-// const generatePage = require('./src/page-template.js');
-
-// const pageHTML = generatePage(name, github)
-
-// fs.writeFile('index.html', pageHTML, err => {
-//     if (err) throw err;
-
-//     console.log('Portfolio complete! Check out index.html to see the output!');
-// });
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -144,9 +136,56 @@ const promptProject = portfolioData => {
     });  
 };
 
+const mockData = {
+    name: 'kota',
+  github: 'CodySawa',
+  about: '18',
+  projects: [
+    {
+      name: 'port-gen',
+      description: 'portfolio generator',
+      languages: [Array],
+      link: 'port-gen.com',
+      feature: true,
+      confirmAddProject: true,
+      confirmAbout: true,
+      about: '19'
+    },
+    {
+      name: 'pro-port',
+      description: 'professional portfolio',
+      languages: [Array],
+      link: 'pro-port.com',
+      feature: false,
+      confirmAddProject: true,
+      confirmAbout: false
+    },
+    {
+      name: 'run-buddy',
+      description: 'Run Buddy',
+      languages: [],
+      link: 'run-buddy.com',
+      feature: false,
+      confirmAddProject: false,
+      confirmAbout: false
+    }
+  ]
+}
+
+    // const pageHTML = generatePage(mockData);
+
+    // fs.writeFile('./index.html', pageHTML, err => {
+    //     if (err) throw new Error(err);
+    // });
+
+
 promptUser()
     .then (promptProject)
     .then(portfolioData => {
-        console.log(portfolioData);
+        const pageHTML = generatePage(portfolioData);
+
+        fs.writeFile('./index.html', pageHTML, err => {
+          if (err) throw new Error(err);
+        });
     });
     
